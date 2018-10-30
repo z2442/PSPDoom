@@ -3,9 +3,9 @@ PSPSDK = $(shell psp-config --pspsdk-path)
 PSPBIN = $(PSPSDK)/../bin
 
 PSP    = yes
-
+#PSP_LARGE_MEMORY = 1
 BUILD_PRX=1
-PSP_FW_VERSION=303
+PSP_FW_VERSION=500
 
 LIBS = -lSDL_mixer -lSDL -lGL -lGLU -lpsprtc -lpspirkeyb -lpsppower -lpspvfpu -lmad -logg -lvorbisidec
 LIBS += -lpspaudiocodec -lvorbis -lsmpeg -lpspaudio -lpspgum -lpspgu -lpsphprm -lm -lstdc++ -lcrypto
@@ -46,11 +46,12 @@ xmn_main.o xmn_md5.o xmn_psp.o #mp3.o i_sdlmusic.o					\
 OBJS   += disablefpuexceptions.o
 
 EXTRA_TARGETS = EBOOT.PBP
-PSP_EBOOT_TITLE = PSP-DOOM by nitr8 (R1)
+PSP_EBOOT_TITLE = PSP-DOOM by TheMrIron2
 PSP_EBOOT_ICON = ICON0.PNG
 PSP_EBOOT_UNKPNG = PIC0.PNG
 PSP_EBOOT_SND0 = SND0.AT3
 #PSP_EBOOT_PIC1 = PIC1.PNG
+VERSION = 1.0.1
 
 ifeq ($(PSP),yes)
 include $(PSPSDK)/lib/build.mak
