@@ -1,0 +1,138 @@
+TARGET = DOOM
+SRCDIR = ../../src
+
+OBJS = \
+	$(SRCDIR)/am_map.o \
+	$(SRCDIR)/d_main.o \
+	$(SRCDIR)/d_items.o \
+	$(SRCDIR)/d_net.o \
+	$(SRCDIR)/doomstat.o \
+	$(SRCDIR)/dstrings.o \
+	$(SRCDIR)/f_finale.o \
+	$(SRCDIR)/f_wipe.o \
+	$(SRCDIR)/g_game.o \
+	$(SRCDIR)/hu_lib.o \
+	$(SRCDIR)/hu_stuff.o \
+	$(SRCDIR)/i_endoom.o \
+	$(SRCDIR)/info.o \
+	$(SRCDIR)/m_menu.o \
+	$(SRCDIR)/m_random.o \
+	$(SRCDIR)/p_ceilng.o \ # did you mean: ceiling
+	$(SRCDIR)/p_doors.o \
+	$(SRCDIR)/p_enemy.o \
+	$(SRCDIR)/p_floor.o \
+	$(SRCDIR)/p_inter.o \
+	$(SRCDIR)/p_lights.o \
+	$(SRCDIR)/p_map.o \
+	$(SRCDIR)/p_maputl.o \
+	$(SRCDIR)/p_mobj.o \
+	$(SRCDIR)/p_plats.o \
+	$(SRCDIR)/p_pspr.o \
+	$(SRCDIR)/p_saveg.o \
+	$(SRCDIR)/p_setup.o \
+	$(SRCDIR)/p_sight.o \
+	$(SRCDIR)/p_spec.o \
+	$(SRCDIR)/p_switch.o \
+	$(SRCDIR)/p_telept.o \
+	$(SRCDIR)/p_tick.o \
+	$(SRCDIR)/p_user.o \
+	$(SRCDIR)/r_bsp.o \
+	$(SRCDIR)/r_data.o \
+	$(SRCDIR)/r_draw.o \
+	$(SRCDIR)/r_main.o \
+	$(SRCDIR)/r_plane.o \
+	$(SRCDIR)/r_segs.o \
+	$(SRCDIR)/r_sky.o \
+	$(SRCDIR)/r_things.o \
+	$(SRCDIR)/sounds.o \
+	$(SRCDIR)/s_sound.o \
+	$(SRCDIR)/statdump.o \
+	$(SRCDIR)/st_lib.o \
+	$(SRCDIR)/st_stuff.o \
+	$(SRCDIR)/dbopl.o \
+	$(SRCDIR)/d_event.o \
+	$(SRCDIR)/d_iwad.o \
+	$(SRCDIR)/d_loop.o \
+	$(SRCDIR)/d_mode.o \
+	$(SRCDIR)/i_main.o \
+	$(SRCDIR)/i_oplmusic.o \
+	$(SRCDIR)/i_sdlsound.o \
+	$(SRCDIR)/i_sound.o \
+	$(SRCDIR)/i_system.o \
+	$(SRCDIR)/i_timer.o \
+	$(SRCDIR)/i_video.o \
+	$(SRCDIR)/m_argv.o \
+	$(SRCDIR)/m_bbox.o \
+	$(SRCDIR)/m_config.o \
+	$(SRCDIR)/m_controls.o \
+	$(SRCDIR)/memio.o \
+	$(SRCDIR)/m_fixed.o \
+	$(SRCDIR)/midifile.o \
+	$(SRCDIR)/m_misc.o \
+	$(SRCDIR)/mus2mid.o \
+	$(SRCDIR)/opl.o \
+	$(SRCDIR)/opl_queue.o \
+	$(SRCDIR)/opl_sdl.o \
+	$(SRCDIR)/opl_timer.o \
+	$(SRCDIR)/sha1.o \
+	$(SRCDIR)/tables.o \
+	$(SRCDIR)/txt_io.o \
+	$(SRCDIR)/txt_sdl.o \
+	$(SRCDIR)/v_video.o \
+	$(SRCDIR)/w_checksum.o \
+	$(SRCDIR)/w_file.o \
+	$(SRCDIR)/w_file_stdc.o \
+	$(SRCDIR)/wi_stuff.o \
+	$(SRCDIR)/w_wad.o \
+	$(SRCDIR)/z_zone.o \
+	$(SRCDIR)/deh_ammo.o \
+	$(SRCDIR)/deh_cheat.o \
+	$(SRCDIR)/deh_doom.o \
+	$(SRCDIR)/deh_frame.o \
+	$(SRCDIR)/deh_io.o \
+	$(SRCDIR)/deh_main.o \
+	$(SRCDIR)/deh_mapping.o \
+	$(SRCDIR)/deh_misc.o \
+	$(SRCDIR)/deh_ptr.o \
+	$(SRCDIR)/deh_sound.o \
+	$(SRCDIR)/deh_str.o \
+	$(SRCDIR)/deh_text.o \
+	$(SRCDIR)/deh_thing.o \
+	$(SRCDIR)/deh_weapon.o \
+	$(SRCDIR)/xmn_main.o \
+	$(SRCDIR)/xmn_md5.o \
+	$(SRCDIR)/xmn_psp.o \
+	#$(SRCDIR)/mp3.o \
+	$(SRCDIR)/i_sdlmusic.o.cpp
+
+	
+OBJS += disablefpuexceptions.o
+
+LIBS = -lSDL_mixer -lSDL -lGL -lGLU -lpsprtc -lpspirkeyb -lpsppower -lpspvfpu -lmad -logg -lvorbisidec
+LIBS += -lpspaudiocodec -lvorbis -lsmpeg -lpspaudio -lpspgum -lpspgu -lpsphprm -lm -lstdc++ -lcrypto
+LIBS += -lpspkubridge -lz #-lSDL_net -lpspwlan -lpspnet -lpspnet_adhoc -lpspsdk -lpspnet_adhocctl
+#LIBS += -lpspnet_adhocmatching
+
+PSP = yes
+BUILD_PRX = 1
+PSP_FW_VERSION=500
+
+CFLAGS = -O2 -g -Wall --fast-math -fno-unit-at-a-time -fdiagnostics-show-option -fno-exceptions
+CFLAGS += -G0 -I/usr/local/pspdev/psp/include/SDL
+
+EXTRA_TARGETS = EBOOT.PBP
+PSP_EBOOT_TITLE = PSP-DOOM by TheMrIron2/nitr8
+PSP_EBOOT_ICON = ICON0.PNG
+PSP_EBOOT_UNKPNG = PIC0.PNG
+PSP_EBOOT_SND0 = SND0.AT3
+
+ifeq ($(PSP),yes)
+include $(PSPSDK)/lib/build.mak
+else
+
+all: DOOM
+
+DOOM: $(OBJS)
+	$(CC) $(LIBS) $(OBJS) -o DOOM
+SRCS = \
+	$(SRCDIR)/SysPSP/main.cpp \
