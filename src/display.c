@@ -81,13 +81,14 @@ static screen_mode_t screen_modes_scaled[] =
     { 320,  240 },
     { 512,  400 },
     { 640,  480 },
-    { 800,  600 },
-    { 960,  720 },
+    { 720,  576 },
+    // PSP supports a max of 720x576
+/*    { 960,  720 },
     { 1024, 800 },
     { 1280, 960 },
     { 1280, 1000 },
     { 1600, 1200 },
-    { 0, 0},
+    { 0, 0},*/
 };
 
 // List of fullscreen modes generated at runtime
