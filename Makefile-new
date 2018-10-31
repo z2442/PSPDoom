@@ -1,5 +1,7 @@
 TARGET = DOOM
 SRCDIR = ../../src
+PSPSDK = $(shell psp-config --pspsdk-path)
+PSPBIN = $(PSPSDK)/../bin
 
 OBJS = \
 	$(SRCDIR)/am_map.o \
