@@ -1,5 +1,5 @@
 TARGET = DOOM
-SRCDIR = ../../src
+SRCDIR = ./src
 PSPSDK = $(shell psp-config --pspsdk-path)
 PSPBIN = $(PSPSDK)/../bin
 
